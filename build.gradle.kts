@@ -1,9 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-//    id("org.springframework.boot") version "3.4.1"
-//    id("org.springframework.boot") version "3.0.1"
-    id("org.springframework.boot") version "2.7.1"
+    id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -12,20 +10,12 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
-//        languageVersion = JavaLanguageVersion.of(21) // 3.4.1
-        languageVersion = JavaLanguageVersion.of(19) // 3.0.1 or 2.7.1
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
 repositories {
     mavenCentral()
-}
-
-// 3.4.1 일 경우 삭제
-dependencyManagement {
-    imports {
-        mavenBom("org.testcontainers:testcontainers-bom:1.20.4")
-    }
 }
 
 dependencies {
@@ -36,11 +26,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
 
     implementation("org.springframework.boot:spring-boot-starter-test")
-//    implementation("org.springframework.boot:spring-boot-testcontainers") // 3.4.1 일 경우 dependencyManagement 대신 추가
+    implementation("org.springframework.boot:spring-boot-testcontainers")
     implementation("org.testcontainers:junit-jupiter")
     implementation("org.testcontainers:mongodb")
     implementation("org.testcontainers:mysql")
     implementation("com.redis:testcontainers-redis:2.2.2")
+    implementation("org.opensearch:opensearch-testcontainers:2.1.2")
 
     // Mac 환경에서 2.7.1 Webflux(Netty) 실행 시 추가
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.104.Final:osx-aarch_64")
